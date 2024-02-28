@@ -1,2 +1,21 @@
 ---
 # tasks file for msterhuj.victoriametrics_utils
+
+- name: "Check if victoriametrics binary is already installed"
+  ansible.builtin.stat:
+    path: "{{ _victoriametrics_binary_install_dir }}/vmctl-prod"
+  register: victoriametrics_binary_installed
+
+- name: "Get installed version of victoriametrics"
+  ansible.builtin.shell: "{{ _victoriametrics_binary_install_dir }}/vmctl-prod -v | cut -d '-' -f 5"
+  register: victoriametrics_installed_version
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+  when: victoriametrics_binary_installed.stat.exists
+
+- name: "Include install tasks"
+  ansible.builtin.include_tasks: "install.yml"
+  when: (not victoriametrics_binary_installed.stat.exists) or
+        (victoriametrics_installed_version.stdout != victoriametrics_utils_version) or
+        (victoriametrics_utils_force_install)

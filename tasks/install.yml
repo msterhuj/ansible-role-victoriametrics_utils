@@ -1,0 +1,18 @@
+- name: "Download victoriametrics utils to tmp folder"
+  get_url:
+    url: "{{ victoriametrics_utils_download_url }}"
+    dest: "/tmp/vmutils-linux.tar.gz"
+    mode: "0755"
+  
+- name: "Extract victoriametrics utils to tmp"
+  unarchive:
+    src: "/tmp/vmutils-linux.tar.gz"
+    dest: "{{ _victoriametrics_binary_install_dir }}"
+    remote_src: true
+    mode: "0755"
+
+- name: "Cleanup victoriametrics utils tarball"
+  file:
+    path: "/tmp/vmutils-linux.tar.gz"
+    state: "absent"
+    force: true

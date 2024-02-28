@@ -1,2 +1,8 @@
 ---
 # defaults file for msterhuj.victoriametrics_utils
+# where to download the victoriametrics utils binary from
+victoriametrics_utils_repo_url: "https://github.com/VictoriaMetrics/VictoriaMetrics"
+victoriametrics_utils_download_url: "{{ victoriametrics_utils_repo_url }}/releases/download/{{ victoriametrics_utils_version }}\
+  /vmutils-linux-{{ go_arch }}-{{ victoriametrics_utils_version }}.tar.gz"
+victoriametrics_utils_version: "v1.98.0"
+victoriametrics_utils_force_install: false

@@ -1,7 +1,15 @@
 Role Name
 =========
 
-This role install victoriametrics utilities on the target machine.
+This role install victoriametrics utilities on the target machine but doesen't install the service (WIP)
+
+- vmagent-prod
+- vmalert-prod
+- vmalert-tool-prod
+- vmauth-prod
+- vmbackup-prod
+- vmctl-prod
+- vmrestore-prod
 
 Requirements
 ------------
