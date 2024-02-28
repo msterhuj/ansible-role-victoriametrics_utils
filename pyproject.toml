@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "msterhuj-victoriametrics-utils"
+version = "0.0.0"
+description = "used to manage ansible and molecule version"
+authors = ["msterhuj <gabin.lanore@gmail.com>"]
+readme = "README.md"
+packages = [{include = "msterhuj"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ansible = "^9.3.0"
+molecule = "^24.2.0"
+molecule-plugins = {extras = ["docker"], version = "^23.5.3"}
+pytest-testinfra = "^10.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

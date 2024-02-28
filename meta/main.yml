@@ -1,0 +1,24 @@
+galaxy_info:
+  author: msterhuj
+  namespace: msterhuj
+  role_name: victoriametrics_utils
+  description: This role installs victoriametrics utilities
+
+  issue_tracker_url: https://github.com/msterhuj/ansible-role-victoriametrics_utils/issues
+
+  license: GPL-3.0-only
+
+  min_ansible_version: "2.1"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+
+  galaxy_tags:
+    - victoriametrics
+    - victoriametrics_utils
+    - utils
+
+  
+dependencies: []
