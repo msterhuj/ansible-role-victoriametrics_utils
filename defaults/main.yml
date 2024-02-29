@@ -9,9 +9,9 @@ victoriametrics_utils_force_install: false
 
 victoriametrics_utils_install:
   - vmctl
-  #- vmagent
-  #- vmalert
-  #- vmalert-tool
-  #- vmauth
-  #- vmbackup
-  #- vmrestore
+  - vmagent
+  - vmalert
+  - vmalert-tool
+  - vmauth
+  - vmbackup
+  - vmrestore
