@@ -6,3 +6,14 @@ victoriametrics_utils_download_url: "{{ victoriametrics_utils_repo_url }}/releas
   /vmutils-linux-{{ go_arch }}-{{ victoriametrics_utils_version }}.tar.gz"
 victoriametrics_utils_version: "v1.98.0"
 victoriametrics_utils_force_install: false
+
+# remove from this list the binaries you don't want to install
+# don't put -prod on the binaries names as it's added automatically
+victoriametrics_utils_install:
+  - vmctl
+  - vmagent
+  - vmalert
+  - vmalert-tool
+  - vmauth
+  - vmbackup
+  - vmrestore

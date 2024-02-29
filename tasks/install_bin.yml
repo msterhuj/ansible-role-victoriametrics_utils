@@ -1,0 +1,29 @@
+# This file if called from the main.yml file with _vmu_bin passed as a variable
+
+- name: "Check presence of {{ _vmu_bin }}"
+  ansible.builtin.stat:
+    path: "{{ _victoriametrics_binary_install_dir }}/{{ _vmu_bin }}-prod"
+  register: bin_installed
+
+- name: "Get installed version of {{ _vmu_bin }}"
+  ansible.builtin.shell: "{{ _victoriametrics_binary_install_dir }}/{{ _vmu_bin }}-prod --version | grep -oP 'v\\d+\\.\\d+\\.\\d+'"
+  register: bin_installed_version
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+  when: bin_installed.stat.exists
+
+- name: "Install Block for {{ _vmu_bin }}"
+  when: (not bin_installed.stat.exists) or
+        (bin_installed_version.stdout != victoriametrics_utils_version)
+  block:
+
+    - name: "Include download tasks"
+      ansible.builtin.include_tasks: download.yml
+
+    - name: "Copy binary to install dir"
+      ansible.builtin.copy:
+        src: "{{ _victoriametrics_tmp_folder }}/{{ _vmu_bin }}-prod"
+        dest: "{{ _victoriametrics_binary_install_dir }}/{{ _vmu_bin }}-prod"
+        mode: "0755"
+        remote_src: true
