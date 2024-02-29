@@ -11,6 +11,8 @@ This role install victoriametrics utilities on the target machine but doesen't i
 - vmctl-prod
 - vmrestore-prod
 
+> By default this role will install every binary but you can change this by setting the variables in the `defaults/main.yml` to select which binaries you want to install.
+
 Requirements
 ------------
 
