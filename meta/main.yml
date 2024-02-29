@@ -17,8 +17,6 @@ galaxy_info:
 
   galaxy_tags:
     - victoriametrics
-    - victoriametrics_utils
     - utils
 
-  
 dependencies: []
