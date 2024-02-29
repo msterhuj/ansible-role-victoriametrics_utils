@@ -11,3 +11,9 @@ def test_binaries(host):
         assert host.file(binary).exists
         assert host.file(binary).is_file
         assert host.file(binary).mode == 0o755
+
+def test_tarball(host):
+    tarball = host.file("/tmp/vmutils-linux.tar.gz")
+    extract = host.file("/tmp/vmutils")
+    assert not tarball.exists
+    assert not extract.exists
