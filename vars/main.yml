@@ -9,3 +9,4 @@ go_arch_map:
 
 go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 _victoriametrics_binary_install_dir: "/usr/local/bin"
+_victoriametrics_utils_possible_install: ['vmctl', 'vmagent', 'vmalert', 'vmalert-tool', 'vmauth', 'vmbackup', 'vmrestore']

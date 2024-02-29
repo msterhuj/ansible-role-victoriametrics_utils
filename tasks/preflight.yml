@@ -1,0 +1,6 @@
+- name: "Validate content of victoriametrics_utils_install"
+  ansible.builtin.assert:
+    that:
+      - "item in _victoriametrics_utils_possible_install"
+    msg: "victoriametrics_utils_install can only contain the following values: {{ _victoriametrics_utils_possible_install }}"
+  loop: "{{ victoriametrics_utils_install }}"
