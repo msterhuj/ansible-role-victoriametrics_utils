@@ -1,4 +1,4 @@
-Role Name
+Victoriametrics Utils
 =========
 
 This role install victoriametrics utilities on the target machine but doesen't install the service (WIP)
