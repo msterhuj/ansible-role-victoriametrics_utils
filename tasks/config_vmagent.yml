@@ -17,7 +17,7 @@
     state: directory
     owner: "vmagent"
     group: "vmagent"
-    mode: "0750"
+    mode: "0755"
   loop:
     - "/etc/vmagent"
     - "/etc/vmagent/conf"
@@ -31,6 +31,7 @@
     owner: "root"
     group: "root"
     mode: "0644"
+  register: vmagent_service
 
 - name: "Setup vmagent config"
   ansible.builtin.template:
@@ -38,4 +39,13 @@
     dest: "/etc/vmagent/conf/vmagent.yml"
     owner: "vmagent"
     group: "vmagent"
-    mode: "0640"
+    mode: "0644"
+  register: vmagent_config
+
+- name: "Reload systemd"
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: vmagent
+    state: restarted
+    enabled: true
+  when: vmagent_service.changed or vmagent_config.changed
