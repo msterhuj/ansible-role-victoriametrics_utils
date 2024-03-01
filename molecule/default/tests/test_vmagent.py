@@ -21,7 +21,7 @@ def test_directory(host):
         assert oct(d.mode) == "0o755"
 
 def test_config_file(host):
-    config = host.file("/etc/vmagent/conf/vmagent.yml")
+    config = host.file("/etc/vmagent/vmagent.yml")
     assert config.exists
     assert config.user == "vmagent"
     assert config.group == "vmagent"
