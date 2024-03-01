@@ -1,0 +1,41 @@
+- name: "Add vmagent group"
+  ansible.builtin.group:
+    name: "vmagent"
+    state: present
+
+- name: "Add vmagent user"
+  ansible.builtin.user:
+    name: "vmagent"
+    group: "vmagent"
+    shell: "/bin/false"
+    system: true
+    state: present
+
+- name: "Create vmagent config folder"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "vmagent"
+    group: "vmagent"
+    mode: "0750"
+  loop:
+    - "/etc/vmagent"
+    - "/etc/vmagent/conf"
+    - "/var/lib/vmagent"
+    - "/var/lib/vmagent/tmp"
+
+- name: "Setup vmagent service"
+  ansible.builtin.template:
+    src: "vmagent.service.j2"
+    dest: "/etc/systemd/system/vmagent.service"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: "Setup vmagent config"
+  ansible.builtin.template:
+    src: "vmagent.yml.j2"
+    dest: "/etc/vmagent/conf/vmagent.yml"
+    owner: "vmagent"
+    group: "vmagent"
+    mode: "0640"

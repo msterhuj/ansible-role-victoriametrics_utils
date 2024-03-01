@@ -7,6 +7,10 @@
     _vmu_bin: "{{ item }}"
   loop: "{{ victoriametrics_utils_install }}"
 
+- name: "Configure vmagent service and config"
+  ansible.builtin.include_tasks: "config_vmagent.yml"
+  when: "'vmagent' in victoriametrics_utils_install"
+
 - name: "Cleanup tmp files"
   ansible.builtin.file:
     path: "{{ item }}"
