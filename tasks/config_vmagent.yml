@@ -1,12 +1,12 @@
-- name: "Add vmagent group"
+- name: "Add group {{ victoriametrics_agent_system_group }}"
   ansible.builtin.group:
-    name: "vmagent"
+    name: "{{ victoriametrics_agent_system_group }}"
     state: present
 
-- name: "Add vmagent user"
+- name: "Add user {{ victoriametrics_agent_system_user }}"
   ansible.builtin.user:
-    name: "vmagent"
-    group: "vmagent"
+    name: "{{ victoriametrics_agent_system_user }}"
+    group: "{{ victoriametrics_agent_system_group }}"
     shell: "/bin/false"
     system: true
     state: present
@@ -19,10 +19,10 @@
     group: "vmagent"
     mode: "0755"
   loop:
-    - "/etc/vmagent"
-    - "/etc/vmagent/conf"
-    - "/var/lib/vmagent"
-    - "/var/lib/vmagent/tmp"
+    - "{{ victoriametrics_agent_config_dir }}"
+    - "{{ victoriametrics_agent_config_dir }}/conf"
+    - "{{ victoriametrics_agent_data_dir }}"
+    - "{{ victoriametrics_agent_data_dir }}/tmp"
 
 - name: "Setup vmagent service"
   ansible.builtin.template:
@@ -31,7 +31,7 @@
     owner: "root"
     group: "root"
     mode: "0644"
-  register: vmagent_service
+  notify: "Reload vmagent service"
 
 - name: "Setup vmagent config"
   ansible.builtin.template:
@@ -40,12 +40,4 @@
     owner: "vmagent"
     group: "vmagent"
     mode: "0644"
-  register: vmagent_config
-
-- name: "Reload systemd"
-  ansible.builtin.systemd:
-    daemon_reload: true
-    name: vmagent
-    state: restarted
-    enabled: true
-  when: vmagent_service.changed or vmagent_config.changed
+  notify: "Reload vmagent service"
