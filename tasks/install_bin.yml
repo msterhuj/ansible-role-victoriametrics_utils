@@ -18,8 +18,14 @@
         (bin_installed_version.stdout != victoriametrics_utils_version)
   block:
 
+    - name: "Check if target folder exists"
+      ansible.builtin.stat:
+        path: "{{ _victoriametrics_tmp_folder }}/{{ _vmu_bin }}-prod"
+      register: tmp_folder
+
     - name: "Include download tasks"
       ansible.builtin.include_tasks: download.yml
+      when: not tmp_folder.stat.exists or victoriametrics_utils_force_install
 
     - name: "Copy binary to install dir"
       ansible.builtin.copy:
