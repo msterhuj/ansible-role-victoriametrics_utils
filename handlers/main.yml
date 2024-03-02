@@ -1,4 +1,8 @@
 ---
 # handlers file for msterhuj.victoriametrics_utils
 - name: "Reload vmagent service"
-  ansible.builtin.include_tasks: "tasks/handler_service.yml"
+  ansible.builtin.systemd:
+    daemon_reload: true
+    state: restarted
+    enabled: true
+    name: vmagent
