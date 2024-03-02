@@ -1,2 +1,4 @@
 collections:
   - community.docker
+roles:
+  - name: msterhuj.victoriametrics_single

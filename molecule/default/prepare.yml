@@ -1,0 +1,17 @@
+- name: Prepare
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: "Update apt cache"
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: "Install debug tools"
+      ansible.builtin.apt:
+        pkg:
+          - curl
+          - lnav
+
+  roles:
+    - role: msterhuj.victoriametrics_single
