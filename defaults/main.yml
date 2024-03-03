@@ -41,3 +41,18 @@ victoriametrics_agent_promscrape:
       static_configs:
         - targets:
             - localhost:8429
+
+#
+# Configuration for vmauth service
+#
+victoriametrics_auth_system_user: "vmauth"
+victoriametrics_auth_system_group: "{{ victoriametrics_auth_system_user }}"
+victoriametrics_auth_config_dir: "/etc/vmauth"
+
+# https://docs.victoriametrics.com/vmagent/#advanced-usage
+victoriametrics_auth_service_args:
+  configCheckInterval: 5s
+  auth.config: "{{ victoriametrics_auth_config_dir }}/config.yml"
+
+# prometheus scrape configuration
+victoriametrics_auth_promscrape: {}

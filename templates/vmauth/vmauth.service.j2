@@ -1,0 +1,16 @@
+[Unit]
+Description=Description=VMAuth service
+After=network.target
+
+[Service]
+Type=simple
+User=${USER_APP}
+ExecStart=/usr/local/bin/vmauth-prod \
+      -configCheckInterval=5s \
+      -auth.config=/etc/vmauth/config.yml
+
+SyslogIdentifier=vmauth
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
