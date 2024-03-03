@@ -34,8 +34,8 @@
 
 - name: "Setup vmagent config"
   ansible.builtin.template:
-    src: "vmagent/vmagent.yml.j2"
-    dest: "/etc/vmagent/vmagent.yml"
+    src: "vmagent/config.yml.j2"
+    dest: "/etc/vmagent/config.yml"
     owner: "vmagent"
     group: "vmagent"
     mode: "0644"

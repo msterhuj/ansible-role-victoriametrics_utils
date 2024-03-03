@@ -28,7 +28,7 @@ victoriametrics_agent_config_dir: "/etc/vmagent"
 
 # https://docs.victoriametrics.com/vmagent/#advanced-usage
 victoriametrics_agent_service_args:
-  promscrape.config: "{{ victoriametrics_agent_config_dir }}/vmagent.yml"
+  promscrape.config: "{{ victoriametrics_agent_config_dir }}/config.yml"
   remoteWrite.tmpDataPath: "{{ victoriametrics_agent_data_dir }}"
   remoteWrite.url: http://localhost:8428/api/v1/write
 
