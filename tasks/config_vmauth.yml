@@ -22,8 +22,8 @@
 
 - name: "Setup vmauth config"
   ansible.builtin.template:
-    src: "vmauth/vmauth.yml.j2"
-    dest: "/etc/vmauth/vmauth.yml"
+    src: "vmauth/config.yml.j2"
+    dest: "{{ victoriametrics_auth_config_dir }}/config.yml"
     owner: "{{ victoriametrics_auth_system_user }}"
     group: "{{ victoriametrics_auth_system_group }}"
     mode: "0644"
