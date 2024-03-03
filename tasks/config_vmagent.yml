@@ -9,6 +9,7 @@
     group: "{{ victoriametrics_agent_system_group }}"
     shell: "/bin/false"
     system: true
+    create_home: false
     state: present
 
 - name: "Create vmagent config folder"
