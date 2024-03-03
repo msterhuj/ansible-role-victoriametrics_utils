@@ -49,35 +49,35 @@ victoriametrics_auth_system_user: "vmauth"
 victoriametrics_auth_system_group: "{{ victoriametrics_auth_system_user }}"
 victoriametrics_auth_config_dir: "/etc/vmauth"
 
-# https://docs.victoriametrics.com/vmagent/#advanced-usage
+# https://docs.victoriametrics.com/cluster-victoriametrics/#list-of-command-line-flags
 victoriametrics_auth_service_args:
   configCheckInterval: 5s
   auth.config: "{{ victoriametrics_auth_config_dir }}/config.yml"
 
-# prometheus scrape configuration
+# configuration for the vmauth service
 victoriametrics_auth_config:
   unauthorized_user:
     url_map:
-    - src_paths:
-      - /targets
-      - /static.+
-      - /service-discovery
-      - /target-relabel-debug
-      url_prefix:
-      - http://localhost:8429
-    - src_paths:
-      - /api/v1/write
-      url_prefix:
-      - http://localhost:8480/insert/1/prometheus
-    - src_paths:
-      - /api/v1/series
-      - /api/v1/query
-      - /api/v1/query_range
-      - /api/v1/label/[^/]+/values
-      url_prefix:
-      - http://localhost:8481/select/1/prometheus
-    - src_paths:
-      - "/vmui.+"
-      - "/prometheus.+"
-      url_prefix:
-      - http://localhost:8481/select/1
+      - src_paths:
+          - /targets
+          - /static.+
+          - /service-discovery
+          - /target-relabel-debug
+        url_prefix:
+          - http://localhost:8429
+      - src_paths:
+          - /api/v1/write
+        url_prefix:
+          - http://localhost:8480/insert/1/prometheus
+      - src_paths:
+          - /api/v1/series
+          - /api/v1/query
+          - /api/v1/query_range
+          - /api/v1/label/[^/]+/values
+        url_prefix:
+          - http://localhost:8481/select/1/prometheus
+      - src_paths:
+          - "/vmui.+"
+          - "/prometheus.+"
+        url_prefix:
+          - http://localhost:8481/select/1
