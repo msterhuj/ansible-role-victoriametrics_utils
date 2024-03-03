@@ -21,13 +21,11 @@
     mode: "0755"
   loop:
     - "{{ victoriametrics_agent_config_dir }}"
-    - "{{ victoriametrics_agent_config_dir }}/conf"
     - "{{ victoriametrics_agent_data_dir }}"
-    - "{{ victoriametrics_agent_data_dir }}/tmp"
 
 - name: "Setup vmagent service"
   ansible.builtin.template:
-    src: "vmagent.service.j2"
+    src: "vmagent/vmagent.service.j2"
     dest: "/etc/systemd/system/vmagent.service"
     owner: "root"
     group: "root"
@@ -36,7 +34,7 @@
 
 - name: "Setup vmagent config"
   ansible.builtin.template:
-    src: "vmagent.yml.j2"
+    src: "vmagent/vmagent.yml.j2"
     dest: "/etc/vmagent/vmagent.yml"
     owner: "vmagent"
     group: "vmagent"

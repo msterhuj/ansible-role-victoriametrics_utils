@@ -8,9 +8,7 @@ def test_directory(host):
     # check owner and permission 0755
     dirs = [
         "/etc/vmagent",
-        "/etc/vmagent/conf",
         "/var/lib/vmagent",
-        "/var/lib/vmagent/tmp",
     ]
 
     for folder in dirs:
