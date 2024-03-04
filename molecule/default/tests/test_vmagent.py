@@ -5,12 +5,9 @@ def test_account_present(host):
     assert user.exists
 
 def test_directory(host):
-    # check owner and permission 0755
     dirs = [
         "/etc/vmagent",
-        "/etc/vmagent/conf",
         "/var/lib/vmagent",
-        "/var/lib/vmagent/tmp",
     ]
 
     for folder in dirs:
@@ -21,7 +18,7 @@ def test_directory(host):
         assert oct(d.mode) == "0o755"
 
 def test_config_file(host):
-    config = host.file("/etc/vmagent/vmagent.yml")
+    config = host.file("/etc/vmagent/config.yml")
     assert config.exists
     assert config.user == "vmagent"
     assert config.group == "vmagent"

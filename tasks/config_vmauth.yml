@@ -1,0 +1,46 @@
+- name: "Add group vmauth"
+  ansible.builtin.group:
+    name: "{{ victoriametrics_auth_system_group }}"
+    state: present
+
+- name: "Add user vmauth"
+  ansible.builtin.user:
+    name: "{{ victoriametrics_auth_system_user }}"
+    group: "{{ victoriametrics_auth_system_group }}"
+    shell: "/bin/false"
+    system: true
+    create_home: false
+    state: present
+
+- name: "Create vmauth config folder"
+  ansible.builtin.file:
+    path: "{{ victoriametrics_auth_config_dir }}"
+    state: directory
+    owner: "{{ victoriametrics_auth_system_user }}"
+    group: "{{ victoriametrics_auth_system_group }}"
+    mode: "0755"
+
+- name: "Setup vmauth config"
+  ansible.builtin.template:
+    src: "vmauth/config.yml.j2"
+    dest: "{{ victoriametrics_auth_config_dir }}/config.yml"
+    owner: "{{ victoriametrics_auth_system_user }}"
+    group: "{{ victoriametrics_auth_system_group }}"
+    mode: "0644"
+
+- name: "Setup vmauth service"
+  ansible.builtin.template:
+    src: "vmauth/vmauth.service.j2"
+    dest: "/etc/systemd/system/vmauth.service"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: "Reload vmauth service"
+
+- name: "Ensure vmauth service is started and enabled"
+  ansible.builtin.systemd:
+    daemon_reload: true
+    state: started
+    enabled: true
+    name: "vmauth"
+  notify: "Reload vmauth service"

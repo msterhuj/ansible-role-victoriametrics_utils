@@ -6,3 +6,10 @@
     state: restarted
     enabled: true
     name: vmagent
+
+- name: "Reload vmauth service"
+  ansible.builtin.systemd:
+    daemon_reload: true
+    state: restarted
+    enabled: true
+    name: vmauth

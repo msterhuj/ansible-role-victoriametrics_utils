@@ -1,15 +1,15 @@
 Victoriametrics Utils
 =========
 
-This role install victoriametrics utilities on the target machine but doesen't install the service (WIP)
+This role install victoriametrics utilities on the target machine
 
-- vmagent-prod
-- vmalert-prod
-- vmalert-tool-prod
-- vmauth-prod
-- vmbackup-prod
-- vmctl-prod
-- vmrestore-prod
+- vmagent-prod (service and config ready)
+- vmalert-prod WIP
+- vmalert-tool-prod (its just a binary tools)
+- vmauth-prod (service and config ready)
+- vmbackup-prod (its just a binary tools)
+- vmctl-prod (its just a binary tools)
+- vmrestore-prod (its just a binary tools)
 
 > By default this role will install every binary but you can change this by setting the variables in the `defaults/main.yml` to select which binaries you want to install.
 

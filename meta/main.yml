@@ -18,5 +18,7 @@ galaxy_info:
   galaxy_tags:
     - victoriametrics
     - utils
+    - vmagent
+    - vmauth
 
 dependencies: []
