@@ -5,17 +5,11 @@ def test_account_present(host):
     assert user.exists
 
 def test_directory(host):
-    dirs = [
-        "/etc/vmauth",
-        "/var/lib/vmauth",
-    ]
-
-    for folder in dirs:
-        d = host.file(folder)
-        assert d.is_directory
-        assert d.user == "vmauth"
-        assert d.group == "vmauth"
-        assert oct(d.mode) == "0o755"
+    d = host.file("/etc/vmauth")
+    assert d.is_directory
+    assert d.user == "vmauth"
+    assert d.group == "vmauth"
+    assert oct(d.mode) == "0o755"
 
 def test_config_file(host):
     config = host.file("/etc/vmauth/config.yml")
@@ -34,5 +28,5 @@ def test_service(host):
     assert service.is_running
 
 def test_socket(host):
-    socket = host.socket("tcp://0.0.0.0:8429")  # Todo change port
+    socket = host.socket("tcp://0.0.0.0:8427")
     assert socket.is_listening

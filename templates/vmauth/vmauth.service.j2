@@ -6,7 +6,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=${USER_APP}
+User={{ victoriametrics_auth_system_user }}
+Group={{ victoriametrics_auth_system_group }}
 ExecStart=/usr/local/bin/vmauth-prod \
       -configCheckInterval=5s \
       -auth.config=/etc/vmauth/config.yml
